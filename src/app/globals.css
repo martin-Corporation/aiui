@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter Variable";
+  --font-mono: var(--font-jet-brains-mono);
+  --color-muted-pressed-background: var(--color-muted-pressed-background);
+  --color-muted-background: var(--color-muted-background);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary-background: var(--color-primary-background);
+  --color-primary-pressed-background: var(--color-primary-pressed-background);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-secondary-background: var(--color-secondary-background);
+  --color-secondary-pressed-background: var(
+    --color-secondary-pressed-background
+  );
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-outline-background: var(--color-outline-background);
+  --color-outline-pressed-background: var(--color-outline-pressed-background);
+  --color-border: var(--color-border);
+  --color-border-focused: var(--color-border-focused);
+  --color-ring: var(--color-ring);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-destructive-background: var(--color-destructive-background);
+  --color-destructive-pressed-background: var(
+    --color-destructive-pressed-background
+  );
+  --color-destructive-ring: var(--color-destructive-ring);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+  --color-destructive-muted-foreground: var(
+    --color-destructive-muted-foreground
+  );
+  --color-accent-background: var(--color-primary-background);
+  --color-accent-pressed-background: var(--color-primary-pressed-background);
+  --color-accent-foreground: var(--color-primary-foreground);
+  --color-popover-background: var(--color-secondary-background);
+  --color-popover-foreground: var(--color-secondary-foreground);
+  --color-input-background: var(--color-secondary-background);
+  --color-input-pressed-background: var(--color-secondary-pressed-background);
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+:root {
+  --color-muted-pressed-background: var(--color-stone-200);
+  --color-muted-background: var(--color-white);
+  --color-background: var(--color-stone-100);
+  --color-foreground: var(--color-stone-950);
+  --color-primary-background: var(--color-stone-800);
+  --color-primary-pressed-background: var(--color-stone-700);
+  --color-primary-foreground: var(--color-stone-50);
+  --color-secondary-background: var(--color-stone-200);
+  --color-secondary-pressed-background: var(--color-stone-300);
+  --color-secondary-foreground: var(--color-foreground);
+  --color-outline-background: var(--color-white);
+  --color-outline-pressed-background: var(--color-stone-200);
+  --color-border: var(--color-stone-200);
+  --color-border-focused: var(--color-stone-300);
+  --color-ring: var(--color-stone-500);
+  --color-muted-foreground: var(--color-stone-600);
+  --color-destructive-background: var(--color-red-100);
+  --color-destructive-pressed-background: var(--color-red-200);
+  --color-destructive-ring: var(--color-red-500);
+  --color-destructive-foreground: var(--color-red-950);
+  --color-destructive-muted-foreground: var(--color-red-800);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-muted-pressed-background: var(--color-stone-800);
+    --color-muted-background: var(--color-black);
+    --color-background: var(--color-stone-900);
+    --color-foreground: var(--color-stone-50);
+    --color-primary-background: var(--color-stone-200);
+    --color-primary-pressed-background: var(--color-stone-300);
+    --color-primary-foreground: var(--color-stone-950);
+    --color-secondary-background: var(--color-stone-800);
+    --color-secondary-pressed-background: var(--color-stone-700);
+    --color-secondary-foreground: var(--color-foreground);
+    --color-outline-background: var(--color-black);
+    --color-outline-pressed-background: var(--color-stone-800);
+    --color-border: var(--color-stone-800);
+    --color-border-focused: var(--color-stone-700);
+    --color-ring: var(--color-stone-500);
+    --color-muted-foreground: var(--color-stone-400);
+    --color-destructive-background: var(--color-red-900);
+    --color-destructive-pressed-background: var(--color-red-800);
+    --color-destructive-foreground: var(--color-red-50);
+    --color-destructive-muted-foreground: var(--color-red-400);
+  }
+}
+
+.typography {
+  @apply prose dark:prose-invert prose-stone max-w-full prose-code:before:hidden prose-code:after:hidden;
+}
+
+.page-offset {
+  @apply px-4 sm:px-[12.5%] md:px-[25%];
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+}
