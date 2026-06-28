@@ -1,8 +1,13 @@
 import { JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/header";
+import { ChatSidebar } from "@/components/chat-sidebar";
 import "@fontsource-variable/inter/opsz";
 import { APP_NAME } from "@/lib/brand";
 import type { Metadata } from "next";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { ChatStoreProvider } from "@/lib/chat-store";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -27,10 +32,18 @@ export default function RootLayout({
       className={`${jetBrainsMono.variable} h-full antialiased`}
     >
       <body className="relative min-h-full flex flex-col bg-background text-foreground">
-        <div className="isolate flex flex-col flex-1">
-          <Header />
-          {children}
-        </div>
+        <TooltipProvider delay={0}>
+          <ChatStoreProvider>
+            <SidebarProvider defaultOpen={false}>
+              <ChatSidebar />
+              <div className="isolate flex flex-col flex-1">
+                <Header />
+                {children}
+              </div>
+              <Toaster />
+            </SidebarProvider>
+          </ChatStoreProvider>
+        </TooltipProvider>
       </body>
     </html>
   );

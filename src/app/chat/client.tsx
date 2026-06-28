@@ -16,7 +16,18 @@ import Markdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeMathML from "@daiji256/rehype-mathml";
 import "temml/dist/Temml-Local.css";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useChatStore } from "@/lib/chat-store";
+import type { UIMessage } from "ai";
+
+function getChatTitle(messages: UIMessage[]): string | null {
+  const firstUser = messages.find((m) => m.role === "user");
+  if (firstUser) {
+    const text = firstUser.parts.find((p): p is { type: "text"; text: string } => p.type === "text")?.text;
+    return text ? text.slice(0, 60) : null;
+  }
+  return null;
+}
 
 export function ChatPageClient({
   initialPrompt,
@@ -25,11 +36,30 @@ export function ChatPageClient({
   initialPrompt?: string;
   initialModel?: string;
 }) {
-  const { messages, sendMessage, status, error, regenerate } = useChat({
+  const { chats, currentChatId, createChat, setCurrentChat, updateChatMessages, renameChat } = useChatStore();
+  const currentChat = chats.find((c) => c.id === currentChatId);
+  const initDone = useRef(false);
+
+  const { messages, setMessages, sendMessage, status, error, regenerate } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat",
     }),
   });
+
+  useEffect(() => {
+    if (initDone.current) return;
+    initDone.current = true;
+
+    if (!currentChat) {
+      const id = createChat();
+      setCurrentChat(id);
+      return;
+    }
+
+    if (currentChat.messages.length > 0) {
+      setMessages(currentChat.messages);
+    }
+  }, []);
 
   useEffect(() => {
     if (initialPrompt && initialModel) {
@@ -46,9 +76,29 @@ export function ChatPageClient({
     }
   }, [initialPrompt, initialModel, sendMessage]);
 
+  useEffect(() => {
+    if (!currentChatId || messages.length === 0) return;
+    updateChatMessages(currentChatId, messages);
+  }, [messages, currentChatId, updateChatMessages]);
+
+  useEffect(() => {
+    if (!currentChatId || messages.length === 0) return;
+    const current = chats.find((c) => c.id === currentChatId);
+    if (!current || current.title !== "New Chat") return;
+    const title = getChatTitle(messages);
+    if (title) {
+      renameChat(currentChatId, title);
+    }
+  }, [messages, currentChatId, chats, renameChat]);
+
   return (
     <main className="flex flex-col h-screen flex-1">
       <section className="flex-1 overflow-y-auto flex flex-col page-offset gap-4 pb-8">
+        {messages.length === 0 && (
+          <div className="flex-1 flex items-center justify-center text-muted-foreground">
+            Start a conversation
+          </div>
+        )}
         {messages.map((message) => (
           <div className="w-full flex flex-col" key={message.id}>
             {message.parts.map((part, e) =>
@@ -76,7 +126,6 @@ export function ChatPageClient({
                       </Markdown>
                     )}
                   </div>
-                  {/* TODO: add response actions */}
                 </div>
               ),
             )}

@@ -36,6 +36,12 @@
   --color-accent-foreground: var(--color-primary-foreground);
   --color-popover-background: var(--color-secondary-background);
   --color-popover-foreground: var(--color-secondary-foreground);
+  --color-sidebar: var(--color-muted-background);
+  --color-sidebar-foreground: var(--color-foreground);
+  --color-sidebar-accent: var(--color-secondary-background);
+  --color-sidebar-accent-foreground: var(--color-foreground);
+  --color-sidebar-border: var(--color-border);
+  --color-sidebar-ring: var(--color-ring);
   --color-input-background: var(--color-secondary-background);
   --color-input-pressed-background: var(--color-secondary-pressed-background);
 }

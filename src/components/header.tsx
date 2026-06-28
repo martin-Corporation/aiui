@@ -1,4 +1,6 @@
 import { NavigationLink } from "./navigation-link";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SettingsDialog } from "@/components/settings-dialog";
 import { APP_NAME } from "@/lib/brand";
 
 export function Header() {
@@ -7,10 +9,14 @@ export function Header() {
       <a href="#main-content" className="sr-only focus-visible:not-sr-only">
         Skip to content
       </a>
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-1">
+        <SidebarTrigger />
         <NavigationLink underline={false} href="/">
           {APP_NAME}
         </NavigationLink>
+      </div>
+      <div className="ml-auto flex items-center gap-1">
+        <SettingsDialog />
       </div>
     </header>
   );
