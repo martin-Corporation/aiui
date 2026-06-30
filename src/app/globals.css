@@ -95,7 +95,7 @@ body {
 }
 
 .typography {
-  @apply prose dark:prose-invert prose-stone max-w-full prose-code:before:hidden prose-code:after:hidden;
+  @apply prose dark:prose-invert prose-stone max-w-full prose-code:before:hidden prose-code:after:hidden prose-pre:rounded-2xl! prose-pre:px-4! prose-pre:py-2!;
 }
 
 .page-offset {

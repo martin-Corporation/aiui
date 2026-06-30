@@ -56,7 +56,7 @@ export function ChatPageClient({
                 part.type === "text" && (
                   <div
                     key={`${message.id}-text-${e}`}
-                    className="px-4 py-2 self-end bg-muted-background text-muted-foreground rounded-3xl max-w-fit whitespace-pre-line"
+                    className="px-4 py-2.5 self-end bg-muted-background border border-border text-muted-foreground rounded-2xl max-w-fit whitespace-pre-line"
                   >
                     {part.text}
                   </div>
@@ -66,7 +66,7 @@ export function ChatPageClient({
                   key={`${message.id}-text-${e}`}
                   className="self-start max-w-full"
                 >
-                  <div className="typography whitespace-pre-wrap *:first:mt-0! *:last:mb-0! prose-pre:rounded-3xl!">
+                  <div className="typography whitespace-pre-wrap *:first:mt-0! *:last:mb-0!">
                     {part.type === "text" && (
                       <Markdown
                         remarkPlugins={[remarkMath]}
@@ -83,11 +83,7 @@ export function ChatPageClient({
           </div>
         ))}
         {status === "submitted" && <PulseDotLoader />}
-        {status === "streaming" && (
-          <div className="rounded-full bg-primary-background size-4">
-            <span className="sr-only">Generating response...</span>
-          </div>
-        )}
+        {status === "streaming" && <PulseDotLoader animate={false} />}
         {error && (
           <Alert variant="destructive">
             <XMarkIcon />

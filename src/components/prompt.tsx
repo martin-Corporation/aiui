@@ -46,7 +46,7 @@ export function Prompt({
     <form
       onReset={() => setValue("")}
       className={cn(
-        "flex min-h-fit flex-col rounded-3xl border border-border focus-within:border-border-focused bg-muted-background",
+        "flex min-h-fit flex-col rounded-2xl border border-border focus-within:border-border-focused bg-muted-background",
         className,
       )}
       {...props}
@@ -64,10 +64,10 @@ export function Prompt({
         onKeyDown={textareaKeyDown}
       ></textarea>
       <div className="flex min-h-fit items-center p-2.5">
-        <div className="flex w-full items-center gap-2">
+        <div className="flex w-full items-center gap-2.5">
           {/* TODO: add attachments */}
         </div>
-        <div className="flex min-w-fit items-center gap-2">
+        <div className="flex min-w-fit items-center gap-2.5">
           <Select
             defaultValue={defaultModel}
             required
