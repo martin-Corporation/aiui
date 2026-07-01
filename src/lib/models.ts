@@ -1,6 +1,6 @@
 export const models = [
   {
     provider: "Ollama",
-    models: [{ label: "martinGPT 1", value: "ollama:martingpt-1" }],
+    models: [{ label: "Qwen 3 (4B)", value: "ollama:qwen3:4b" }],
   },
 ] as const;

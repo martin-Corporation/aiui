@@ -66,7 +66,7 @@ export function ChatPageClient({
                   key={`${message.id}-text-${e}`}
                   className="self-start max-w-full"
                 >
-                  <div className="typography whitespace-pre-wrap *:first:mt-0! *:last:mb-0!">
+                  <div className="typography whitespace-pre-line *:first:mt-0! *:last:mb-0!">
                     {part.type === "text" && (
                       <Markdown
                         remarkPlugins={[remarkMath]}
